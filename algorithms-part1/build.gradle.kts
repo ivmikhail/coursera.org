@@ -1,5 +1,6 @@
 plugins {
     java
+    jacoco
 }
 
 val packagePercolation = task("packagePercolation", type = Zip::class) {
@@ -34,6 +35,11 @@ tasks {
     build {
         dependsOn(packagePercolation)
         dependsOn(uberJar)
+    }
+    jacocoTestReport {
+        reports {
+            xml.isEnabled = true
+        }
     }
 }
 
