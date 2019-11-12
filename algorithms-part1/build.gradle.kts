@@ -12,6 +12,7 @@ val packagePercolation = task("packagePercolation", type = Zip::class) {
         include("PercolationStats.java")
     }
 }
+
 val uberJar = task("uberJar", type = Jar::class) {
     archiveClassifier.set("uber")
 
@@ -24,6 +25,18 @@ val uberJar = task("uberJar", type = Jar::class) {
     })
 }
 
+
+val packageQueues = task("packageQueues", type = Zip::class) {
+    archiveFileName.set("queues.zip")
+    destinationDirectory.set(file("$buildDir/libs"))
+
+    from("src/main/java") {
+        include("Deque.java")
+        include("RandomizedQueue.java")
+        include("Permutation.java")
+    }
+}
+
 tasks {
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -33,8 +46,9 @@ tasks {
         useJUnitPlatform()
     }
     build {
-        dependsOn(packagePercolation)
         dependsOn(uberJar)
+        dependsOn(packagePercolation)
+        dependsOn(packageQueues)
     }
     jacocoTestReport {
         reports {
