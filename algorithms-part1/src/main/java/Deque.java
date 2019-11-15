@@ -25,6 +25,8 @@ public class Deque<Item> implements Iterable<Item> {
             } else {
                 current = current.next;
             }
+            if (current == null) throw new NoSuchElementException();
+
             return current.val;
         }
 
