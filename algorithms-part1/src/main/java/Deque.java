@@ -7,27 +7,19 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class Iter implements Iterator {
 
-        private Node current;
+        private Node current = head;
 
         @Override
         public boolean hasNext() {
-            if (current == null) {
-                return head != null;
-            }
-
-            return current.next != null;
+            return current != null;
         }
 
         @Override
         public Item next() {
-            if (current == null) {
-                current = head;
-            } else {
-                current = current.next;
-            }
             if (current == null) throw new NoSuchElementException();
-
-            return current.val;
+            Item item = current.val;
+            current = current.next;
+            return item;
         }
 
         @Override
