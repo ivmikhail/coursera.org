@@ -9,7 +9,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private int indx;
         private final Item[] items;
 
-        @SuppressWarnings("unchecked")
         public Iter() {
             indx = 0;
 
@@ -44,7 +43,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int size;
 
     // construct an empty randomized queue
-    @SuppressWarnings("unchecked")
     public RandomizedQueue() {
         arr = (Item[]) new Object[1];
         size = 0;
@@ -137,7 +135,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void resize(int newCapacity) {
         Item[] newArr = (Item[]) new Object[newCapacity];
         for (int i = 0; i < size; i++) {
