@@ -7,15 +7,18 @@ import java.util.NoSuchElementException;
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private class Iter implements Iterator<Item> {
         private int indx;
-        private Item[] items;
+        private final Item[] items;
 
+        @SuppressWarnings("unchecked")
         public Iter() {
-            //copy arr to items
+            indx = 0;
+
+            // copy arr to items
             items = (Item[]) new Object[arr.length];
             for (int i = 0; i < size; i++) {
                 items[i] = arr[i];
             }
-            //shuffle items
+            // shuffle items
             StdRandom.shuffle(items);
         }
 
@@ -26,7 +29,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-            if(!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) throw new NoSuchElementException();
+
             return items[indx++];
         }
 
@@ -40,6 +44,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int size;
 
     // construct an empty randomized queue
+    @SuppressWarnings("unchecked")
     public RandomizedQueue() {
         arr = (Item[]) new Object[1];
         size = 0;
@@ -48,7 +53,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // unit testing (required)
     public static void main(String[] args) {
         RandomizedQueue<String> q = new RandomizedQueue<>();
-        StdOut.printf("isEmpty() expected %s, actual %s", true, q.isEmpty());
+        StdOut.printf("isEmpty() expected %s, actual %s", Boolean.TRUE, q.isEmpty());
         StdOut.println();
 
         q.enqueue("A");
@@ -101,8 +106,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         throwExIfEmpty();
         int toRemove = StdRandom.uniform(0, size);
         Item res = arr[toRemove];
-        rightShift(toRemove);
+        arr[toRemove] = arr[size - 1];
         size--;
+        arr[size] = null;
         tryToResizeCapacity();
         return res;
     }
@@ -123,7 +129,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private void tryToResizeCapacity() {
-        //arr is between 25% and 100% full
+        // arr is between 25% and 100% full
         if (arr.length == size) {
             resize(2 * arr.length);
         } else if (size > 0 && size == arr.length / 4) {
@@ -131,20 +137,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void resize(int newCapacity) {
         Item[] newArr = (Item[]) new Object[newCapacity];
         for (int i = 0; i < size; i++) {
             newArr[i] = arr[i];
         }
         arr = newArr;
-    }
-
-    private void rightShift(int indx) {
-        int i = indx;
-        while (i < size - 1) {
-            arr[i] = arr[i + 1];
-            i++;
-        }
-        arr[i] = null;
     }
 }

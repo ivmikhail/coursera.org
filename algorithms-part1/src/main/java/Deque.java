@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
 
-    private class Iter implements Iterator {
+    private class Iter implements Iterator<Item> {
 
         private Node current = head;
 
@@ -134,7 +134,7 @@ public class Deque<Item> implements Iterable<Item> {
     // unit testing (required)
     public static void main(String[] args) {
         Deque<String> d = new Deque<>();
-        StdOut.printf("isEmpty()     expected %s, actual %s", true, d.isEmpty());
+        StdOut.printf("isEmpty()     expected %s, actual %s", Boolean.TRUE, d.isEmpty());
         StdOut.println();
 
         d.addLast("C");
@@ -142,7 +142,7 @@ public class Deque<Item> implements Iterable<Item> {
         d.addFirst("B");
         d.addFirst("A");
 
-        //A B C D
+        // A B C D
         StdOut.print("Iterator      ");
         Iterator<String> iter = d.iterator();
         while (iter.hasNext()) {
