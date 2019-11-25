@@ -37,6 +37,17 @@ val packageQueues = task("packageQueues", type = Zip::class) {
     }
 }
 
+val packageCollinear = task("packageCollinear", type = Zip::class) {
+    archiveFileName.set("collinear.zip")
+    destinationDirectory.set(file("$buildDir/libs"))
+
+    from("src/main/java") {
+        include("BruteCollinearPoints.java")
+        include("FastCollinearPoints.java")
+        include("Point.java")
+    }
+}
+
 tasks {
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -49,6 +60,7 @@ tasks {
         dependsOn(uberJar)
         dependsOn(packagePercolation)
         dependsOn(packageQueues)
+        dependsOn(packageCollinear)
     }
     jacocoTestReport {
         reports {
