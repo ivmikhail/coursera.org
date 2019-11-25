@@ -3,16 +3,6 @@ plugins {
     jacoco
 }
 
-val packagePercolation = task("packagePercolation", type = Zip::class) {
-    archiveFileName.set("percolation.zip")
-    destinationDirectory.set(file("$buildDir/libs"))
-
-    from("src/main/java") {
-        include("Percolation.java")
-        include("PercolationStats.java")
-    }
-}
-
 val uberJar = task("uberJar", type = Jar::class) {
     archiveClassifier.set("uber")
 
@@ -25,6 +15,16 @@ val uberJar = task("uberJar", type = Jar::class) {
     })
 }
 
+
+val packagePercolation = task("packagePercolation", type = Zip::class) {
+    archiveFileName.set("percolation.zip")
+    destinationDirectory.set(file("$buildDir/libs"))
+
+    from("src/main/java") {
+        include("Percolation.java")
+        include("PercolationStats.java")
+    }
+}
 
 val packageQueues = task("packageQueues", type = Zip::class) {
     archiveFileName.set("queues.zip")
