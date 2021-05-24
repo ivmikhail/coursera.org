@@ -5,3 +5,14 @@
 build
 .idea
 out
+
+# binaries
+*.zip
+
+# scala
+*.class
+*.log
+.lib/
+dist/*
+target/
+.bsp
