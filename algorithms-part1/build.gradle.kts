@@ -1,6 +1,19 @@
 plugins {
     java
     jacoco
+    id("org.sonarqube") version "2.8"
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "ivmikhail_coursera.org")
+    }
 }
 
 val uberJar = task("uberJar", type = Jar::class) {
