@@ -36,42 +36,48 @@ pascal(c=1,r=2) 2
     }
   }
 
-  //(if (zero? x) max (/ 1 x))
+  // true (if (zero? x) max (/ 1 x))
+  // false ())(
   /**
     * Exercise 2
     */
   def balance(chars: List[Char]): Boolean = {
-    def balanced(chars: List[Char], open: Int): Boolean = {
-      if (chars.isEmpty) {
+    def balance(chars: List[Char], open: Int): Boolean = {
+      if (open < 0) {
+        false
+      } else if (chars.isEmpty) {
         open == 0
       } else if (chars.head == '(') {
-        balanced(chars.tail, open + 1)
+        balance(chars.tail, open + 1)
       } else if (chars.head == ')') {
-        open > 0 && balanced(chars.tail, open - 1)
+        balance(chars.tail, open - 1)
       } else {
-        balanced(chars.tail, open)
+        balance(chars.tail, open)
       }
     }
 
-    balanced(chars, 0)
+    balance(chars, 0)
   }
+
+  // assertEquals(3, countChange(4,List(1,2)))
 
   /**
     * Exercise 3
     */
   def countChange(money: Int, coins: List[Int]): Int = {
-    def count(moneyamount: Int, coinsorted: List[Int]): Int = {
-      if (coinsorted.isEmpty) {
+    def countChangeSorted(money: Int, sortedCoins: List[Int]): Int = {
+      if (sortedCoins.isEmpty) {
         0
-      } else if (moneyamount - coinsorted.head == 0) {
+      } else if (money - sortedCoins.head == 0) {
         1
-      } else if (moneyamount - coinsorted.head < 0) {
+      } else if (money - sortedCoins.head < 0) {
         0
       } else {
-        countChange(moneyamount - coinsorted.head, coinsorted) +
-          countChange(moneyamount, coinsorted.tail)
+        countChangeSorted(money - sortedCoins.head, sortedCoins) +
+          countChangeSorted(money, sortedCoins.tail)
       }
     }
-    count(money, coins.sorted)
+
+    countChangeSorted(money, coins.sorted)
   }
 }
