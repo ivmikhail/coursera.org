@@ -1,6 +1,6 @@
 package example
 
-object Lists {
+object Lists:
 
   /**
    * This method computes the sum of all elements in the list xs. There are
@@ -44,22 +44,9 @@ object Lists {
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
   def max(xs: List[Int]): Int = {
-    if(xs.isEmpty) {
-      throw new NoSuchElementException
-    }
-    max(xs.head, xs.tail)
-  }
-
-  private def max(value: Int, xs: List[Int]): Int = {
-    if(xs.isEmpty) {
-      value
+    if(xs.tail.isEmpty) {
+      xs.head
     } else {
-      val xsMax = max(xs.head, xs.tail)
-      if(value > xsMax) {
-        value
-      } else {
-        xsMax
-      }
+      math.max(xs.head, max(xs.tail))
     }
   }
-}
