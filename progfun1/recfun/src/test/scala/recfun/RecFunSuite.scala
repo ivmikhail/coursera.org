@@ -1,49 +1,57 @@
 package recfun
 
-import org.junit._
-import org.junit.Assert.assertEquals
-
-class RecFunSuite {
-  import RecFun._
+class RecFunSuite extends munit.FunSuite:
+  import RecFun.*
 
   // ------ balance tests -----------------------------------------------------
 
-  @Test def `balance: '(if (zero? x) max (/ 1 x))' is balanced`: Unit =
+  test("balance: '(if (zero? x) max (/ 1 x))' is balanced") {
     assert(balance("(if (zero? x) max (/ 1 x))".toList))
+  }
 
-  @Test def `balance: 'I told him ...' is balanced`: Unit =
+  test("balance: 'I told him ...' is balanced") {
     assert(balance("I told him (that it's not (yet) done).\n(But he wasn't listening)".toList))
+  }
 
-  @Test def `balance: ':-)' is unbalanced`: Unit =
+  test("balance: ':-)' is unbalanced") {
     assert(!balance(":-)".toList))
+  }
 
-  @Test def `balance: counting is not enough`: Unit =
+  test("balance: counting is not enough") {
     assert(!balance("())(".toList))
+  }
 
   // ------ countChange tests -------------------------------------------------
 
-  @Test def `countChange: example given in instructions`: Unit =
-    assertEquals(3, countChange(4,List(1,2)))
+  test("countChange: example given in instructions") {
+    assertEquals(countChange(4,List(1,2)), 3)
+  }
 
-  @Test def `countChange: sorted CHF`: Unit =
-    assertEquals(1022, countChange(300,List(5,10,20,50,100,200,500)))
+  test("countChange: sorted CHF") {
+    assertEquals(countChange(300,List(5,10,20,50,100,200,500)), 1022)
+  }
 
-  @Test def `countChange: no pennies`: Unit =
-    assertEquals(0, countChange(301,List(5,10,20,50,100,200,500)))
+  test("countChange: no pennies") {
+    assertEquals(countChange(301,List(5,10,20,50,100,200,500)), 0)
+  }
 
-  @Test def `countChange: unsorted CHF`: Unit =
-    assertEquals(1022, countChange(300,List(500,5,50,100,20,200,10)))
+  test("countChange: unsorted CHF") {
+    assertEquals(countChange(300,List(500,5,50,100,20,200,10)), 1022)
+  }
 
   // ------ pascal tests ------------------------------------------------------
 
-  @Test def `pascal: col=0,row=2`: Unit =
-    assertEquals(1, pascal(0, 2))
+  test("pascal: col=0,row=2") {
+    assertEquals(pascal(0, 2), 1)
+  }
 
-  @Test def `pascal: col=1,row=2`: Unit =
-    assertEquals(2, pascal(1, 2))
+  test("pascal: col=1,row=2") {
+    assertEquals(pascal(1, 2), 2)
+  }
 
-  @Test def `pascal: col=1,row=3`: Unit =
-    assertEquals(3, pascal(1, 3))
+  test("pascal: col=1,row=3") {
+    assertEquals(pascal(1, 3), 3)
+  }
 
-  @Rule def individualTestTimeout = new org.junit.rules.Timeout(10 * 1000)
-}
+  import scala.concurrent.duration.*
+  override val munitTimeout = 10.seconds
