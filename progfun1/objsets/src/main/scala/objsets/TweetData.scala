@@ -1,7 +1,7 @@
 package objsets
 
 // real tweet data, collected on Oct 1 2012
-object TweetData {
+object TweetData:
   val gizmodo = """[
 { "user": "gizmodo", "text": "Kindle Paperwhite Review: Forget Everything Else, This Is the E-Reader You Want http://t.co/737W6aNC", "retweets": 51.0 },
 { "user": "gizmodo", "text": "These new Apple patents give a sneak peek at what future iPhone cameras might have in store. http://t.co/0YT9rjxp", "retweets": 49.0 },
@@ -716,4 +716,3 @@ object TweetData {
 { "user": "mashable", "text": "Why Being Unfriended on Facebook Hurts [STUDY] http://t.co/0eHHUrTo", "retweets": 51.0 },
 { "user": "mashable", "text": "Think Apple Maps Is Bad? Remember the Tale of MobileMe http://t.co/Koeew9eU", "retweets": 41.0 }
 ]"""
-}

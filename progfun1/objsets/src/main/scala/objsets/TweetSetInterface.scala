@@ -4,7 +4,7 @@ package objsets
  * The interface used by the grading infrastructure. Do not change signatures
  * or your submission will fail with a NoSuchMethodError.
  */
-trait TweetSetInterface {
+trait TweetSetInterface:
   def incl(tweet: Tweet): TweetSet
   def remove(tweet: Tweet): TweetSet
   def contains(tweet: Tweet): Boolean
@@ -12,4 +12,3 @@ trait TweetSetInterface {
   def union(that: TweetSet): TweetSet
   def mostRetweeted: Tweet
   def descendingByRetweet: TweetList
-}
