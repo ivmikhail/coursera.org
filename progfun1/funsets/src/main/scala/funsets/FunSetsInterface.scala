@@ -4,7 +4,7 @@ package funsets
  * The interface used by the grading infrastructure. You should not edit any
  * code here, or your submission may fail with a NoSuchMethodError.
  */
-trait FunSetsInterface {
+trait FunSetsInterface:
   type FunSet = Int => Boolean
 
   def contains(s: FunSet, elem: Int): Boolean
@@ -17,4 +17,3 @@ trait FunSetsInterface {
   def exists(s: FunSet, p: Int => Boolean): Boolean
   def map(s: FunSet, f: Int => Int): FunSet
   def toString(s: FunSet): String
-}
